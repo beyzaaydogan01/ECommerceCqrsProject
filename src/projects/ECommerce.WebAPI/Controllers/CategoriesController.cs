@@ -1,4 +1,8 @@
-﻿using ECommerce.Application.Features.Categories.Commands.Create;
+﻿using Core.Application.Requests;
+using ECommerce.Application.Features.Categories.Commands.Create;
+using ECommerce.Application.Features.Categories.Queries.GetById;
+using ECommerce.Application.Features.Categories.Queries.GetList;
+using ECommerce.Application.Features.Categories.Queries.GetListByPaginate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,4 +18,28 @@ public class CategoriesController : BaseController
         CategoryAddedResponseDto response = await Mediator.Send(categoryAddCommand);
         return Ok(response);
     }
+
+    [HttpGet("getall")]
+    public async Task<IActionResult> GetAll()
+    {
+        GetListCategoryQuery query = new GetListCategoryQuery();
+
+        List<GetListCategoryResponseDto> responses = await Mediator.Send(query);
+
+        return Ok(responses);
+    }
+
+    [HttpGet("paginate")]
+    public async Task<IActionResult> GetPaginate([FromQuery] PageRequest pageRequest)
+    {
+        var query = new GetListByPaginateCategoryQuery { PageRequest = pageRequest };
+        var response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpGet("getbyid")]
+    public async Task<IActionResult> GetById([FromQuery] int id) =>
+         Ok(await Mediator.Send(new GetByIdCategoryQuery { Id = id }));
+
 }
