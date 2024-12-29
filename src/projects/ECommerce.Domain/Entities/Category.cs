@@ -1,4 +1,5 @@
-﻿using Core.Persistence.Repositories;
+﻿using Azure;
+using Core.Persistence.Repositories;
 
 namespace ECommerce.Domain.Entities;
 
