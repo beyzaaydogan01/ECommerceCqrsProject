@@ -1,12 +1,14 @@
 ﻿
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Performance;
+using ECommerce.Application.Services.Repositories;
 using ECommerce.Domain.Entities;
-using ECommerce.Persistence.Abstracts;
 using MediatR;
 
 namespace ECommerce.Application.Features.Categories.Queries.GetList;
 
-public class GetListCategoryQuery : IRequest<List<GetListCategoryResponseDto>>
+public class GetListCategoryQuery : IRequest<List<GetListCategoryResponseDto>>, IPerformanceRequest
 {
 
     public sealed class GetListCategoryQueryHandler : IRequestHandler<GetListCategoryQuery, List<GetListCategoryResponseDto>>
