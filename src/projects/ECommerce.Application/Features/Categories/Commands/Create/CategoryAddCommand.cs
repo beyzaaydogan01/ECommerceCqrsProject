@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using ECommerce.Application.Features.Categories.Rules;
 using ECommerce.Domain.Entities;
 using ECommerce.Persistence.Abstracts;
 using MediatR;
@@ -11,13 +12,15 @@ public sealed class CategoryAddCommand:IRequest<CategoryAddedResponseDto>
     public string Name { get; set; }
 
     public sealed class CategoryAddCommandHandler(
-        IMapper _mapper, ICategoryRepository _categoryRepository)
+        IMapper _mapper, ICategoryRepository _categoryRepository, CategoryBusinessRules _businessRules)
 
         : IRequestHandler<CategoryAddCommand, CategoryAddedResponseDto>
     {
 
         public async Task<CategoryAddedResponseDto> Handle(CategoryAddCommand request, CancellationToken cancellationToken)
         {
+            await _businessRules.CategoryNameMustBeUniqueAsync(request.Name, cancellationToken);
+
             Category? category = _mapper.Map<Category>(request);
 
             await _categoryRepository.AddAsync(category);
