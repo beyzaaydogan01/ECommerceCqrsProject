@@ -13,7 +13,7 @@ namespace ECommerce.WebAPI.Controllers;
 [ApiController]
 public class CategoriesController : BaseController
 {
-    [HttpPost]
+    [HttpPost("create")]
     public async Task<IActionResult> Add([FromBody] CategoryAddCommand categoryAddCommand)
     {
         CategoryAddedResponseDto response = await Mediator.Send(categoryAddCommand);
