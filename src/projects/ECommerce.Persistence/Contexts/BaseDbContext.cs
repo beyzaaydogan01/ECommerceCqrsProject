@@ -14,8 +14,12 @@ public class BaseDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.Entity<User>()
+            .ToTable("AppUsers")
+            .HasDiscriminator<string>("Discriminator")
+            .HasValue<User>("User")
+            .HasValue<AppUser>("AppUser");
     }
 
     public DbSet<Category> Categories { get; set; }
