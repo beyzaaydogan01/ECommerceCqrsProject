@@ -8,6 +8,7 @@ using Core.Application.Pipelines.Validation;
 using Core.CrossCuttingConcerns.Serilog.Loggers;
 using ECommerce.Application.Features.Auth.Rules;
 using ECommerce.Application.Features.Categories.Rules;
+using ECommerce.Application.Features.Products.Rules;
 using ECommerce.Application.Services.RoleServices;
 using ECommerce.Application.Services.UserServices;
 using ECommerce.Application.Services.UserWithTokenServices;
@@ -24,6 +25,10 @@ public static class ApplicationServiceRegistration
     {
         services.AddScoped<UserBusinessRules>();
         services.AddScoped<CategoryBusinessRules>();
+        services.AddScoped<ProductBusinessRules>();
+
+        services.AddScoped<LoggerServiceBase, FileLogger>();
+
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IUserWithTokenService, UserWithTokenService>();
         services.AddScoped<IRoleService, RoleService>();
@@ -36,6 +41,7 @@ public static class ApplicationServiceRegistration
             con.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
             con.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
             con.AddOpenBehavior(typeof(LoginBehavior<,>));
+            con.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
 
         return services;
