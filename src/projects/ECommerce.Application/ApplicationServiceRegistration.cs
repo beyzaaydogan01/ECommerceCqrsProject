@@ -27,7 +27,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<CategoryBusinessRules>();
         services.AddScoped<ProductBusinessRules>();
 
-        services.AddScoped<LoggerServiceBase, FileLogger>();
+        services.AddTransient<LoggerServiceBase, MsSqlLogger>();
 
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IUserWithTokenService, UserWithTokenService>();

@@ -19,6 +19,7 @@ public class ProductAddCommand : IRequest<ProductAddResponseDto>, ISecuredReques
     public int SubCategoryId { get; set; }
     public string[] Roles => [GeneralOperationClaims.Admin];
 
+
     public class ProductAddCommandHandler : IRequestHandler<ProductAddCommand, ProductAddResponseDto>
     {
         private readonly IProductRepository _productRepository;

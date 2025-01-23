@@ -15,7 +15,7 @@ public class SubCategoryConfiguration : IEntityTypeConfiguration<SubCategory>
         builder.HasOne(s => s.Category)
             .WithMany(c => c.SubCategories)
             .HasForeignKey(s => s.CategoryId)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.Cascade);
         builder.HasMany(s => s.Products)
             .WithOne(p => p.SubCategory)
             .HasForeignKey(p => p.SubCategoryId)

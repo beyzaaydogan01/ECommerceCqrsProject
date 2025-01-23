@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Login;
 using Core.Application.Pipelines.Performance;
 using Core.Security.Constants;
@@ -11,7 +12,7 @@ using MediatR;
 
 namespace ECommerce.Application.Features.Categories.Commands.Create;
 
-public sealed class CategoryAddCommand:IRequest<CategoryAddedResponseDto>, ISecuredRequest
+public sealed class CategoryAddCommand:IRequest<CategoryAddedResponseDto>, ILoggableRequest
 {
     public string Name { get; set; }
 
