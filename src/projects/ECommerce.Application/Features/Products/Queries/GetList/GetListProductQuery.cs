@@ -1,12 +1,21 @@
 ﻿
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using ECommerce.Application.Services.Repositories;
 using MediatR;
 
 namespace ECommerce.Application.Features.Products.Queries.GetList;
 
-public class GetListProductQuery : IRequest<List<GetListProductResponseDto>>
+public class GetListProductQuery : IRequest<List<GetListProductResponseDto>>, ICachableRequest
 {
+    public string CacheKey => "GetAllProductsList";
+
+    public bool ByPassCache => false;
+
+    public string? CacheGroupKey => "Products";
+
+    public TimeSpan? SlidingExpiration { get; }
+
     public class GetListProductQueryHandler : IRequestHandler<GetListProductQuery, List<GetListProductResponseDto>>
     {
         private readonly IProductRepository _productRepository;
