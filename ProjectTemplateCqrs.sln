@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4B16CFE5-4C68-4162-AE50-75958BDEB7E8}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Application", "src\projects\ECommerce.Application\ECommerce.Application.csproj", "{FEF29B28-A8AB-4BF0-9DF7-779AF4B09420}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.WebAPI", "src\projects\ECommerce.WebAPI\ECommerce.WebAPI.csproj", "{55D8643E-A747-4446-AF16-E391CFFC97D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Infrastructure", "src\projects\ECommerce.Infrastructure\ECommerce.Infrastructure.csproj", "{24985092-7AC6-4CD9-B93A-955CFA3492CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{55D8643E-A747-4446-AF16-E391CFFC97D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55D8643E-A747-4446-AF16-E391CFFC97D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55D8643E-A747-4446-AF16-E391CFFC97D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24985092-7AC6-4CD9-B93A-955CFA3492CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24985092-7AC6-4CD9-B93A-955CFA3492CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24985092-7AC6-4CD9-B93A-955CFA3492CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24985092-7AC6-4CD9-B93A-955CFA3492CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,5 +84,6 @@ Global
 		{B2D01522-1D4E-4F82-97B2-BCD1E990DD64} = {EAB712B2-FBDA-4849-84BA-B44E6EA44825}
 		{FEF29B28-A8AB-4BF0-9DF7-779AF4B09420} = {EAB712B2-FBDA-4849-84BA-B44E6EA44825}
 		{55D8643E-A747-4446-AF16-E391CFFC97D0} = {EAB712B2-FBDA-4849-84BA-B44E6EA44825}
+		{24985092-7AC6-4CD9-B93A-955CFA3492CB} = {EAB712B2-FBDA-4849-84BA-B44E6EA44825}
 	EndGlobalSection
 EndGlobal

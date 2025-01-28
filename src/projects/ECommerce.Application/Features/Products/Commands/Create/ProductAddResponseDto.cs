@@ -3,7 +3,7 @@ namespace ECommerce.Application.Features.Products.Commands.Create;
 
 public class ProductAddResponseDto
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public string Name { get; set; }
     public decimal Price { get; set; }
     public string Description { get; set; }

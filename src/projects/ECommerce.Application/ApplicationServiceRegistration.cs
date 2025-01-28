@@ -42,6 +42,8 @@ public static class ApplicationServiceRegistration
             con.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
             con.AddOpenBehavior(typeof(LoginBehavior<,>));
             con.AddOpenBehavior(typeof(LoggingBehavior<,>));
+            con.AddOpenBehavior(typeof(CachingBehavior<,>));
+            con.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
         });
 
         return services;
