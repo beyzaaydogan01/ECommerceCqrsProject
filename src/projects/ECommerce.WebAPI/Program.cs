@@ -1,5 +1,6 @@
 using ECommerce.Application;
 using ECommerce.Persistence;
+using ECommerce.Infrastructure;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Core.Security;
 using Core.Security.JWT;
@@ -19,6 +20,7 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddSecurityServices();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CloudinaryService>();
+builder.Services.AddInfrastructureDependencies(builder.Configuration);
 
 const string tokenOptionsConfigurationName = "TokenOptions";
 TokenOptions tokenOptions = builder.Configuration.GetSection(tokenOptionsConfigurationName).Get<TokenOptions>()

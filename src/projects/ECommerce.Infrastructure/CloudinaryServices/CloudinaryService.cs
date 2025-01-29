@@ -1,21 +1,21 @@
-﻿
-using CloudinaryDotNet;
+﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using ECommerce.Application.Services.Infrastructure;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace ECommerce.Infrastructure.CloudinaryServices;
 
-public sealed class CloudinaryService
+public sealed class CloudinaryService : ICloudinaryService
 {
     private readonly CloudinaryDotNet.Cloudinary _cloudinary;
     private readonly Account _account;
     private readonly CloudinarySettings _cloudinarySettings;
 
-    public CloudinaryService(IConfiguration configuration)
+    public CloudinaryService(IOptions<CloudinarySettings> cloudOptions)
     {
-        _cloudinarySettings = configuration.GetSection("CloudinarySettings").Get<CloudinarySettings>();
-        _account = new Account(_cloudinarySettings.CloudName, _cloudinarySettings.ApiSecret, _cloudinarySettings.ApiKey);
+        _cloudinarySettings = cloudOptions.Value;
+        _account = new Account(_cloudinarySettings.CloudName, _cloudinarySettings.ApiKey, _cloudinarySettings.ApiSecret);
         _cloudinary = new CloudinaryDotNet.Cloudinary(_account);
     }
 
@@ -23,7 +23,7 @@ public sealed class CloudinaryService
     {
         var imageUploadResult = new ImageUploadResult();
 
-        if(formFile.Length > 0)
+        if (formFile.Length > 0)
         {
             using var stream = formFile.OpenReadStream();
 
@@ -37,6 +37,8 @@ public sealed class CloudinaryService
             string url = _cloudinary.Api.UrlImgUp.BuildUrl(imageUploadResult.PublicId);
             return url;
         }
+
         return string.Empty;
     }
+
 }
