@@ -1,6 +1,7 @@
 ﻿using ECommerce.Application.Features.Categories.Queries.GetList;
 using ECommerce.Application.Features.Products.Commands.Create;
 using ECommerce.Application.Features.Products.Queries.GetList;
+using ECommerce.Application.Features.Products.Queries.GetListByImages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,13 @@ namespace ECommerce.WebAPI.Controllers
         {
             List<GetListProductResponseDto> responses = await Mediator.Send(new GetListProductQuery());
             return Ok(responses);   
+        }
+
+        [HttpGet("getallbyImages")]
+        public async Task<IActionResult> GetAllByImageUrls()
+        {
+            List<GetListProductByProductImagesResponse> responses = await Mediator.Send(new GetListProductByProductImageQuery());
+            return Ok(responses);
         }
     }
 }
