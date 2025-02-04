@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Core.Security.Encryption;
 using Microsoft.IdentityModel.Tokens;
 using ECommerce.Infrastructure.CloudinaryServices;
+using Core.ElasticSearch;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddSecurityServices();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddInfrastructureDependencies(builder.Configuration);
+builder.Services.AddElasticSearch(builder.Configuration);
 
 const string tokenOptionsConfigurationName = "TokenOptions";
 TokenOptions tokenOptions = builder.Configuration.GetSection(tokenOptionsConfigurationName).Get<TokenOptions>()
