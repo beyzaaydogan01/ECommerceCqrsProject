@@ -23,8 +23,14 @@ public class ElasticSearchClientService : IElasticSearchClientService
         }
     }
 
-    public Task<List<T>> SearchAsync<T>(string indexName) where T : class
+    public async Task<List<T>> SearchAsync<T>(string indexName) where T : class
     {
-        throw new NotImplementedException();
+        var searchResponse = await _elasticClient.SearchAsync<T>(s => s.Index(indexName)
+            .Query
+            (
+                q => q.MatchAll()
+            )
+        );
+        return searchResponse.Documents.ToList();
     }
 }
