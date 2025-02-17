@@ -1,7 +1,7 @@
 ﻿
-namespace ECommerce.Application.Features.Products.Commands.Create;
+namespace ECommerce.Application.Features.Products.Queries.GetListFilterByElasticSearch;
 
-public sealed class ProductAddResponseDto
+public class GetProductListFilterByElasticSearchResponseDto
 {
     public string Name { get; set; }
     public decimal Price { get; set; }

@@ -3,6 +3,7 @@ using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
+using Core.ElasticSearch.Services.Abstracts;
 using Core.Security.Constants;
 using ECommerce.Application.Features.Products.Rules;
 using ECommerce.Application.Services.Repositories;
@@ -31,12 +32,14 @@ public class ProductAddCommand : IRequest<ProductAddResponseDto>, ISecuredReques
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
         private readonly ProductBusinessRules _businessRules;
+        private readonly IElasticSearchClientService _elasticSearch;
 
-        public ProductAddCommandHandler(IProductRepository productRepository, IMapper mapper, ProductBusinessRules businessRules)
+        public ProductAddCommandHandler(IProductRepository productRepository, IMapper mapper, ProductBusinessRules businessRules, IElasticSearchClientService elasticSearch)
         {
             _productRepository = productRepository;
             _mapper = mapper;
             _businessRules = businessRules;
+            _elasticSearch = elasticSearch;
         }
 
         public async Task<ProductAddResponseDto> Handle(ProductAddCommand request, CancellationToken cancellationToken)
@@ -46,6 +49,8 @@ public class ProductAddCommand : IRequest<ProductAddResponseDto>, ISecuredReques
             var created = await _productRepository.AddAsync(product);
 
             var response = _mapper.Map<ProductAddResponseDto>(created);
+
+            await _elasticSearch.IndexDocumentAsync(response, "products");
 
             return response;
         }
