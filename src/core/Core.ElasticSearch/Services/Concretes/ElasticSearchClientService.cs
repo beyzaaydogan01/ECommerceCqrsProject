@@ -33,4 +33,16 @@ public class ElasticSearchClientService : IElasticSearchClientService
         );
         return searchResponse.Documents.ToList();
     }
+
+    public async Task<T> UpdateAsync<T>(string id, T updated) where T : class
+    {
+        var response = await _elasticClient.UpdateAsync<T>(id, u => u.Doc(updated));
+
+        if (!response.IsValid)
+        {
+            throw new BusinessException(response.OriginalException.Message);
+        }
+
+        return updated;
+    }
 }
