@@ -26,7 +26,6 @@
     <Folder Include="Features\ProductImages\Commands\Update\" />
     <Folder Include="Features\ProductImages\Constants\" />
     <Folder Include="Features\ProductImages\Rules\" />
-    <Folder Include="Features\Products\Commands\Delete\" />
     <Folder Include="Features\Products\Constants\" />
   </ItemGroup>
 

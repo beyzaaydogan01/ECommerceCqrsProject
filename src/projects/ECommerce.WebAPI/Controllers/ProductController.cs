@@ -1,5 +1,6 @@
 ﻿using ECommerce.Application.Features.Categories.Queries.GetList;
 using ECommerce.Application.Features.Products.Commands.Create;
+using ECommerce.Application.Features.Products.Commands.Delete;
 using ECommerce.Application.Features.Products.Queries.GetList;
 using ECommerce.Application.Features.Products.Queries.GetListByElasticSearch;
 using ECommerce.Application.Features.Products.Queries.GetListByImages;
@@ -47,6 +48,16 @@ namespace ECommerce.WebAPI.Controllers
             var query = new GetProductListFilterByElasticSearchQuery() { Text = text };
 
             var response = await Mediator.Send(query);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete([FromQuery]Guid id)
+        {
+            var command = new ProductDeleteCommand() {  Id = id };
+
+            var response = await Mediator.Send(command);
 
             return Ok(response);
         }
